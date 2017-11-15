@@ -1,0 +1,21 @@
+{
+    "name": "3f/meta",
+    "description": "A class and a collection to handle metadata and access them \"à la C#\".",
+    "keywords": ["meta", "metadata", "collection", "properties"],
+    "homepage": "https://github.com/dedalozzo/meta",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Filippo Fadda",
+            "email": "filippo.fadda@gmail.com",
+            "homepage": "http://www.linkedin.com/in/filippofadda"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.0",
+        "3f/tool-bag": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {"Meta\\": "src/"}
+    }
+}
