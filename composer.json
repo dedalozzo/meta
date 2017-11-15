@@ -1,6 +1,6 @@
 {
     "name": "3f/meta",
-    "description": "A class and a collection to handle metadata and access them \"à la C#\".",
+    "description": "A class and a collection to handle metadata and access them \"à la\" C#.",
     "keywords": ["meta", "metadata", "collection", "properties"],
     "homepage": "https://github.com/dedalozzo/meta",
     "license": "Apache-2.0",

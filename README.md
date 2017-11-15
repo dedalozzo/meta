@@ -8,7 +8,7 @@
 
 Meta
 ====
-A class and a collection to handle metadata and access them \"à la C#\". 
+A class and a collection to handle metadata and access them "à la" C#. 
 
 
 Composer Installation
