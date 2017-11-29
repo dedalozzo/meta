@@ -17,6 +17,8 @@ use Meta\Extension\TProperty;
 use ToolBag\Helper\ArrayHelper;
 use ToolBag\Exception\JSONErrorException;
 
+use InvalidArgumentException;
+
 
 /**
  * @brief This abstract class provides a set of methods to store and access metadata.
@@ -41,7 +43,7 @@ abstract class MetaClass {
 
   /**
    * @brief Returns the metadata.
-   * @retval mixed
+   * @return mixed
    */
   public function getMetadata($name) {
     return @$this->meta[$name];
@@ -50,8 +52,8 @@ abstract class MetaClass {
 
   /**
    * @brief Checks the document for the given attribute.
-   * @param[in] string $name The attribute name.
-   * @retval bool
+   * @param string $name The attribute name.
+   * @return bool
    */
   public function isMetadataPresent($name) {
     return (array_key_exists($name, $this->meta)) ? TRUE : FALSE;
@@ -60,10 +62,10 @@ abstract class MetaClass {
 
   /**
    * @brief Sets the metadata to the provided value.
-   * @param[in] string $name The metadata name.
-   * @param[in] mixed $value The metadata value.
-   * @param[in] bool $override When `true` overrides the metadata value.
-   * @param[in] bool $allowNull When `true` allows a `null` value.
+   * @param string $name The metadata name.
+   * @param mixed $value The metadata value.
+   * @param bool $override When `true` overrides the metadata value.
+   * @param bool $allowNull When `true` allows a `null` value.
    */
   public function setMetadata($name, $value, $override = TRUE, $allowNull = TRUE) {
     if (is_null($value) && !$allowNull)
@@ -78,7 +80,7 @@ abstract class MetaClass {
 
   /**
    * @brief Removes an metadata previously set.
-   * @param[in] string $name The metadata name.
+   * @param string $name The metadata name.
    */
   public function unsetMetadata($name) {
     if (array_key_exists($name, $this->meta))
@@ -89,7 +91,7 @@ abstract class MetaClass {
   /**
    * @brief Given a JSON object, this function assigns every single object's property to the `$meta` array, the array
    * that stores the document's metadata.
-   * @param[in] string $json A JSON object.
+   * @param string $json A JSON object.
    */
   public function assignJson($json) {
     $this->meta = array_merge($this->meta, ArrayHelper::fromJson($json, TRUE));
@@ -98,15 +100,15 @@ abstract class MetaClass {
 
   /**
    * @brief Assigns the given associative array to the `$meta` array, the array that stores the document's metadata.
-   * @param[in] array $array An associative array.
-   * @throws \InvalidArgumentException
+   * @param array $array An associative array.
+   * @throws InvalidArgumentException
    */
   public function assignArray(array $array) {
     if (ArrayHelper::isAssociative($array)) {
       $this->meta = array_merge($this->meta, $array);
     }
     else
-      throw new \InvalidArgumentException("\$array must be an associative array.");
+      throw new InvalidArgumentException("\$array must be an associative array.");
   }
 
 
@@ -121,7 +123,7 @@ abstract class MetaClass {
 
   /**
    * @brief Returns the document representation as a JSON object.
-   * @retval JSON object
+   * @return string A JSON object.
    * @throws JSONErrorException
    */
   public function asJson() {
@@ -140,7 +142,7 @@ abstract class MetaClass {
 
   /**
    * @brief Returns the document representation as an associative array.
-   * @retval array An associative array
+   * @return array An associative array.
    */
   public function asArray() {
     return $this->meta;

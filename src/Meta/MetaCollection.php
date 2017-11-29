@@ -13,6 +13,8 @@ namespace Meta;
 
 use Meta\Extension\TProperty;
 
+use ArrayIterator;
+
 
 /**
  * @brief This class is used to represent a generic collection.
@@ -36,7 +38,7 @@ abstract class MetaCollection implements \IteratorAggregate, \Countable, \ArrayA
 
   /**
    * @brief Creates a new collection of items.
-   * @param[in] string $name Collection's name.
+   * @param string $name Collection's name.
    * @param array &$meta Array of metadata.
    */
   public function __construct($name, array &$meta) {
@@ -57,7 +59,7 @@ abstract class MetaCollection implements \IteratorAggregate, \Countable, \ArrayA
 
   /**
    * @brief Returns the collection as a real array.
-   * @retval array An associative array using as keys the e-mail addresses, and as values if the address are verified or
+   * @return array An associative array using as keys the e-mail addresses, and as values if the address are verified or
    * not.
    */
   public function asArray() {
@@ -67,16 +69,16 @@ abstract class MetaCollection implements \IteratorAggregate, \Countable, \ArrayA
 
   /**
    * @brief Returns an external iterator.
-   * @retval [ArrayIterator](http://php.net/manual/en/class.arrayiterator.php).
+   * @return ArrayIterator
    */
   public function getIterator() {
-    return new \ArrayIterator($this->meta[$this->name]);
+    return new ArrayIterator($this->meta[$this->name]);
   }
 
 
   /**
    * @brief Returns the number of documents found.
-   * @retval integer Number of documents.
+   * @return integer Number of documents.
    */
   public function count() {
     return count($this->meta[$this->name]);
@@ -87,7 +89,7 @@ abstract class MetaCollection implements \IteratorAggregate, \Countable, \ArrayA
    * @brief Returns `true` in case there aren't items inside the collection, `false` otherwise.
    * @details Since the PHP core developers are noobs, `empty()` cannot be used on any class that implements ArrayAccess.
    * @attention This method must be used in place of `empty()`.
-   * @retval bool
+   * @return bool
    */
   public function isEmpty() {
     return empty($this->meta[$this->name]) ? TRUE : FALSE;
@@ -97,8 +99,8 @@ abstract class MetaCollection implements \IteratorAggregate, \Countable, \ArrayA
   /**
    * @brief Whether or not an offset exists.
    * @details This method is executed when using `isset()` or `empty()` on objects implementing ArrayAccess.
-   * @param[in] integer $offset An offset to check for.
-   * @retval bool Returns `true` on success or `false` on failure.
+   * @param integer $offset An offset to check for.
+   * @return bool Returns `true` on success or `false` on failure.
    */
   public function offsetExists($offset) {
     return isset($this->meta[$this->name][$offset]);
@@ -108,8 +110,8 @@ abstract class MetaCollection implements \IteratorAggregate, \Countable, \ArrayA
   /**
    * @brief Returns the value at specified offset.
    * @details This method is executed when checking if offset is `empty()`.
-   * @param[in] integer $offset The offset to retrieve.
-   * @retval mixed Can return all value types.
+   * @param integer $offset The offset to retrieve.
+   * @return mixed Can return all value types.
    */
   public function offsetGet($offset)  {
     return $this->meta[$this->name][$offset];
